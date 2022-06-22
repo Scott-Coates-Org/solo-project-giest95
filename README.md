@@ -81,6 +81,6 @@ Update your progress by checking off the tasks for each sprint. We will **not** 
 
 [*Replace me with mockups*]
 
-| ![Skate Slope Mockup](images/SkateSlopeMockup.jpg)                   | ![Benjamin Bannekat](https://octodex.github.com/images/bannekat.png) |
+| ![Skate Slope Mockup](src/images/SkateSlopeMockup.jpg)               | ![Benjamin Bannekat](https://octodex.github.com/images/bannekat.png) |
 | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
 | ![Benjamin Bannekat](https://octodex.github.com/images/bannekat.png) | ![Benjamin Bannekat](https://octodex.github.com/images/bannekat.png) |
