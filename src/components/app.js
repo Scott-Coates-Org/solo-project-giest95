@@ -16,6 +16,8 @@ import ErrorBoundary from 'components/error-boundary';
 // see here: https://stackoverflow.com/questions/63554233/react-router-v5-history-push-changes-the-address-bar-but-does-not-change-the
 // https://github.com/ReactTraining/react-router/issues/4059#issuecomment-254437084
 // this is incredibly common but not our problem: https://stackoverflow.com/questions/62449663/react-router-with-custom-history-not-working
+
+/* is this just to be able to use the back button? */
 export const history = createBrowserHistory();
 
 function withReduxProvider(Component) {
@@ -54,6 +56,7 @@ function App() {
             <Route path="/logout" render={(routeProps) => <Logout {...routeProps} {...props} firebase={firebase} />} />
 
             {/* this must be on the bottom */}
+            {/* what props? */}
             <ProtectedRoute path="/" component={Home} {...props} />
           </Switch>
         </Router>
