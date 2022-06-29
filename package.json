@@ -10,6 +10,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
+    "@react-google-maps/api": "^2.12.0",
     "@reduxjs/toolkit": "^1.5.1",
     "bootstrap": "^4.6.0",
     "firebase": "^8.10.1",
