@@ -4,14 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { createWidget, fetchAllWidgets, savePhoto } from "redux/widget";
 import Layout from "./layout";
-import GMap from "./GMap";
+import HomeAddress from "./homeaddress/HomeAddress";
+import MapWidget from "./googlemap/MapWidget";
 
 export default function Home(props) {
-  const dispatch = useDispatch();
+  /*   const dispatch = useDispatch();
 
-  const { data, isLoaded, hasErrors } = useSelector((state) => state.widget);
+  const { data, isLoaded, hasErrors } = useSelector((state) => state.widget); */
 
-  useEffect(() => {
+  //video for search bar https://www.youtube.com/watch?v=WZcxJGmLbSo
+  /* useEffect(() => {
     // dispatch async thunks are promises
     // https://redux-toolkit.js.org/api/createAsyncThunk#unwrapping-result-actions
     dispatch(
@@ -23,9 +25,9 @@ export default function Home(props) {
     ).then(() => {
       dispatch(fetchAllWidgets());
     });
-  }, [dispatch]);
+  }, [dispatch]); */
 
-  const {
+  /*   const {
     register,
     handleSubmit,
     reset,
@@ -55,13 +57,14 @@ export default function Home(props) {
         }
       });
     }
-  };
+  }; */
 
   return (
     <Layout {...props}>
       <nav className="d-flex flex-column align-items-center">
-        <GMap />
-        <h1 className="my-3 text-center">My Project</h1>
+        <HomeAddress />
+        <MapWidget />
+        {/* <h1 className="my-3 text-center">My Project</h1>
         <section>
           {!isLoaded && "Widgets loading…"}
           {hasErrors && "Error Loading"}
@@ -112,7 +115,7 @@ export default function Home(props) {
               </pre>
             </div>
           )}
-        </section>
+        </section> */}
       </nav>
     </Layout>
   );

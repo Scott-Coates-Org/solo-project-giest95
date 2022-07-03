@@ -1,16 +1,17 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from 'components/home';
-import { AuthProvider, useAuth } from 'components/user/auth';
-import Login from 'components/user/login';
-import Logout from 'components/user/logout';
-import { firebase } from 'firebase/client';
-import { createBrowserHistory } from 'history';
+import "bootstrap/dist/css/bootstrap.min.css";
+import Home from "components/home";
+import { AuthProvider, useAuth } from "components/user/auth";
+import Login from "components/user/login";
+import Logout from "components/user/logout";
+import { firebase } from "firebase/client";
+import { createBrowserHistory } from "history";
 import { useEffect } from "react";
-import { Provider, useDispatch } from 'react-redux';
+import { Provider, useDispatch } from "react-redux";
 import { Route, Router, Switch } from "react-router-dom";
-import store from 'redux/store';
-import { getData, getDataSuccess } from 'redux/user';
-import ErrorBoundary from 'components/error-boundary';
+import store from "redux/store";
+import { getData, getDataSuccess } from "redux/user";
+import ErrorBoundary from "components/error-boundary";
+import EditHomeAddress from "./homeaddress/EditHomeAddress";
 
 // DO NOT import BrowserRouter (as per tutorial). that caused router to not actually do anything.
 // see here: https://stackoverflow.com/questions/63554233/react-router-v5-history-push-changes-the-address-bar-but-does-not-change-the
@@ -39,10 +40,10 @@ function App() {
     dispatch(getData());
   }, []);
 
-  const storeUserData = user => {
+  const storeUserData = (user) => {
     const providerData = user.providerData[0];
 
-    const userData = { ...providerData, uid: user.uid, };
+    const userData = { ...providerData, uid: user.uid };
 
     dispatch(getDataSuccess(userData));
   };
@@ -52,15 +53,30 @@ function App() {
       <AuthProvider onLogin={storeUserData}>
         <Router history={history}>
           <Switch>
-            <Route path="/login" render={(routeProps) => <Login {...routeProps} {...props} firebase={firebase} />} />
-            <Route path="/logout" render={(routeProps) => <Logout {...routeProps} {...props} firebase={firebase} />} />
+            <Route
+              path="/login"
+              render={(routeProps) => (
+                <Login {...routeProps} {...props} firebase={firebase} />
+              )}
+            />
+            <Route
+              path="/logout"
+              render={(routeProps) => (
+                <Logout {...routeProps} {...props} firebase={firebase} />
+              )}
+            />
 
             {/* this must be on the bottom */}
             {/* what props? */}
-            <ProtectedRoute path="/" component={Home} {...props} />
+            <ProtectedRoute exact path="/" component={Home} {...props} />
+            <ProtectedRoute
+              path="/address"
+              component={EditHomeAddress}
+              {...props}
+            />
           </Switch>
         </Router>
-      </AuthProvider >
+      </AuthProvider>
     </ErrorBoundary>
   );
 
@@ -77,7 +93,9 @@ const ProtectedRoute = ({ component, ...args }) => {
   });
 
   const retVal = (
-    <Route render={(routeProps) => <WrappedComponent {...routeProps} {...args} />} />
+    <Route
+      render={(routeProps) => <WrappedComponent {...routeProps} {...args} />}
+    />
   );
 
   return retVal;
@@ -95,7 +113,6 @@ function withAuthenticationRequired(Component, options) {
       loginOptions = {},
     } = options;
 
-
     useEffect(async () => {
       let isAuthorized = false;
 
@@ -107,20 +124,20 @@ function withAuthenticationRequired(Component, options) {
             ...loginOptions,
             appState: {
               ...loginOptions.appState,
-              returnTo: typeof returnTo === 'function' ? returnTo() : returnTo,
+              returnTo: typeof returnTo === "function" ? returnTo() : returnTo,
             },
           };
 
-          history.push('/login', opts)
+          history.push("/login", opts);
         }
       }
-
     }, [history, isAuthenticated, loginOptions, returnTo]);
 
     return isAuthenticated ? <Component {...props} /> : onRedirecting();
   };
 }
 
-const defaultReturnTo = () => `${window.location.pathname}${window.location.search}`;
+const defaultReturnTo = () =>
+  `${window.location.pathname}${window.location.search}`;
 
 const defaultOnRedirecting = () => <></>;
